@@ -1,19 +1,26 @@
 # Financial AI Platform 🤖💼
 
-An agentic AI platform for financial document analysis, risk assessment, and executive reporting using **CrewAI**, **LangGraph**, **OpenAI**, and **FAISS**.
+An advanced agentic AI platform for financial document analysis, risk assessment, and executive reporting using **CrewAI**, **LangGraph**, **OpenAI**, and **FAISS** with real-time processing capabilities.
 
 ## 📋 Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Configuration](#configuration)
-- [Project Structure](#project-structure)
-- [Usage](#usage)
+- [Quick Start](#quick-start)
+- [Usage Examples](#usage-examples)
 - [API Endpoints](#api-endpoints)
 - [Agents & Tasks](#agents--tasks)
+- [Workflows](#workflows)
+- [RAG System](#rag-system)
+- [Services](#services)
+- [Configuration Details](#configuration-details)
+- [Troubleshooting](#troubleshooting)
+- [Next Steps](#next-steps)
 - [Contributing](#contributing)
 - [License](#license)
 - [Support](#support)
@@ -22,48 +29,146 @@ An agentic AI platform for financial document analysis, risk assessment, and exe
 
 ## 🎯 Overview
 
-The Financial AI Platform is an intelligent multi-agent system designed to analyze financial documents, assess business risks, and generate comprehensive executive reports. It leverages **CrewAI** for agent orchestration and **OpenAI GPT-4o-mini** for intelligent analysis.
+The Financial AI Platform is an intelligent multi-agent system designed to analyze financial documents, assess business risks, and generate comprehensive executive reports in real-time. It leverages **CrewAI** for agent orchestration, **LangGraph** for workflow management, and **FAISS** for intelligent document retrieval.
 
 ### Key Capabilities:
-- **Document Extraction**: Extract financial information from documents
-- **Financial Analysis**: Analyze company financial health and performance
-- **Risk Assessment**: Identify and evaluate financial and operational risks
-- **Executive Reporting**: Generate professional executive summaries and reports
-- **Vector-based Search**: Fast and intelligent document retrieval using FAISS
+- **Document Extraction**: Intelligent extraction of financial information from documents
+- **Financial Analysis**: Deep analysis of company financial health and performance metrics
+- **Risk Assessment**: Comprehensive identification and evaluation of financial and operational risks
+- **Executive Reporting**: Professional executive summaries and detailed reports generation
+- **Vector-based Search**: Fast and intelligent document retrieval using FAISS embeddings
 - **Multi-Agent Workflow**: Specialized agents working together for comprehensive analysis
+- **Real-time Processing**: Live data processing and analysis with immediate results
+- **RAG Integration**: Retrieval-Augmented Generation for context-aware insights
 
 ---
 
 ## ✨ Features
 
-- ✅ Multi-agent AI system powered by **CrewAI**
-- ✅ 5 specialized agents (Document, Financial, Risk, Report, Extraction)
-- ✅ FastAPI REST API for easy integration
-- ✅ Document extraction and financial metrics analysis
-- ✅ Risk assessment and recommendations
-- ✅ Executive summary generation
-- ✅ Vector database integration (FAISS) for semantic search
-- ✅ OpenAI GPT-4o-mini integration for intelligent analysis
-- ✅ LangGraph for workflow orchestration
-- ✅ Environment-based configuration
+- ✅ **Multi-Agent Architecture**: 4 specialized agents powered by **CrewAI**
+- ✅ **Real-time Processing**: Live financial data analysis and monitoring
+- ✅ **FastAPI REST API**: Scalable REST API for easy integration
+- ✅ **Document Extraction**: Extract financial metrics from unstructured documents
+- ✅ **Advanced Analytics**: Financial health scoring and performance metrics
+- ✅ **Risk Assessment**: Identify and evaluate financial and operational risks
+- ✅ **Executive Reporting**: Automated professional report generation
+- ✅ **RAG System**: Retrieval-Augmented Generation with vector embeddings
+- ✅ **Vector Database**: FAISS integration for semantic search and similarity matching
+- ✅ **LangGraph Workflows**: Sophisticated workflow orchestration and state management
+- ✅ **OpenAI Integration**: GPT-4o-mini for intelligent analysis and reasoning
+- ✅ **Environment Configuration**: Flexible configuration management
+- ✅ **Modular Services**: Decoupled service architecture for scalability
+- ✅ **Production Ready**: Error handling, logging, and monitoring
 
 ---
 
 ## 🛠 Tech Stack
 
-| Technology | Purpose |
-|-----------|---------|
-| **Python 3.9+** | Core programming language |
-| **FastAPI** | REST API framework |
-| **Uvicorn** | ASGI server |
-| **CrewAI** | Multi-agent orchestration |
-| **LangGraph** | Workflow graph execution |
-| **LangChain OpenAI** | OpenAI integration |
-| **OpenAI** | GPT-4o-mini LLM |
-| **FAISS** | Vector similarity search |
-| **Pydantic** | Data validation |
-| **Python-dotenv** | Environment management |
-| **NumPy** | Numerical computing |
+| Technology | Purpose | Version |
+|-----------|---------|---------|
+| **Python** | Core programming language | 3.9+ |
+| **FastAPI** | REST API framework | Latest |
+| **Uvicorn** | ASGI server | Latest |
+| **CrewAI** | Multi-agent orchestration | Latest |
+| **LangGraph** | Workflow graph execution | Latest |
+| **LangChain** | LLM framework | Latest |
+| **OpenAI** | GPT-4o-mini LLM | Latest |
+| **FAISS** | Vector similarity search | Latest |
+| **Pydantic** | Data validation | v2+ |
+| **Python-dotenv** | Environment management | Latest |
+| **NumPy** | Numerical computing | Latest |
+
+---
+
+## 📁 Project Structure
+
+```
+financial-ai-platform/
+
+├── app/                                   # Application module
+│
+├── agents/                                # AI Agent definitions
+│   ├── __init__.py
+│   ├── document_agent.py                  # Document extraction & processing agent
+│   ├── financial_agent.py                 # Financial analysis agent
+│   ├── risk_agent.py                      # Risk assessment agent
+│   └── report_agent.py                    # Executive report generation agent
+│
+├── tasks/                                 # Task definitions for agents
+│   ├── __init__.py
+│   ├── extraction_task.py                 # Document extraction tasks
+│   ├── analysis_task.py                   # Financial analysis tasks
+│   ├── risk_task.py                       # Risk assessment tasks
+│   └── report_task.py                     # Report generation tasks
+│
+├── workflows/                             # LangGraph workflow orchestration
+│   ├── __init__.py
+│   ├── state.py                           # Workflow state management
+│   └── financial_workflow.py               # Main financial workflow definition
+│
+├── rag/                                   # Retrieval-Augmented Generation system
+│   ├── __init__.py
+│   ├── embeddings.py                      # Embedding generation & management
+│   ├── vector_store.py                    # FAISS vector store operations
+│   └── retriever.py                       # Document retrieval logic
+│
+├── services/                              # Business logic services
+│   ├── __init__.py
+│   └── financial_service.py               # Core financial service logic
+│
+├── api/                                   # FastAPI REST endpoints
+│   ├── __init__.py
+│   └── financial_api.py                   # API routes and endpoint handlers
+│
+├── config/                                # Configuration management
+│   ├── __init__.py
+│   └── settings.py                        # Settings and environment variables
+│
+├── main.py                                # FastAPI application entry point
+├── .env                                   # Environment variables (create manually)
+├── requirements.txt                       # Python dependencies
+├── README.md                              # This file
+└── .gitignore                             # Git ignore file
+```
+
+### Module Descriptions
+
+#### **agents/**
+Contains all AI agent definitions. Each agent has specific roles and responsibilities:
+- **Document Agent**: Processes and extracts information from financial documents
+- **Financial Agent**: Analyzes financial metrics and company performance
+- **Risk Agent**: Identifies and assesses financial and operational risks
+- **Report Agent**: Generates professional executive reports
+
+#### **tasks/**
+Defines specific tasks for each agent to execute:
+- **Extraction Task**: Extract financial data from documents
+- **Analysis Task**: Analyze financial health and metrics
+- **Risk Task**: Assess and evaluate risks
+- **Report Task**: Generate comprehensive reports
+
+#### **workflows/**
+LangGraph-based workflow orchestration:
+- **state.py**: Manages workflow state throughout execution
+- **financial_workflow.py**: Defines the complete financial analysis workflow
+
+#### **rag/**
+Retrieval-Augmented Generation system for intelligent search:
+- **embeddings.py**: Generates and manages text embeddings
+- **vector_store.py**: FAISS vector database operations
+- **retriever.py**: Retrieves relevant documents for context
+
+#### **services/**
+Core business logic services:
+- **financial_service.py**: Main service handling financial operations
+
+#### **api/**
+FastAPI REST API:
+- **financial_api.py**: API routes and endpoint handlers
+
+#### **config/**
+Configuration management:
+- **settings.py**: Application settings and environment variables
 
 ---
 
@@ -77,9 +182,10 @@ Before you begin, ensure you have the following installed:
 - **OpenAI API Key** (from [platform.openai.com](https://platform.openai.com))
 
 ### System Requirements:
-- RAM: Minimum 4GB (8GB recommended)
-- Storage: At least 1GB free space
-- OS: Windows, macOS, or Linux
+- **RAM**: Minimum 4GB (8GB+ recommended)
+- **Storage**: At least 2GB free space
+- **OS**: Windows, macOS, or Linux
+- **Internet**: Required for OpenAI API access
 
 ---
 
@@ -124,7 +230,7 @@ python -c "import fastapi; import crewai; import faiss; print('✅ Installation 
 
 ### Step 1: Create Environment File
 
-Create a `.env` file in the project root directory:
+Create a `.env` file in the project root:
 
 ```bash
 touch .env
@@ -132,66 +238,36 @@ touch .env
 
 ### Step 2: Add Configuration Variables
 
-Add your OpenAI API key:
+Add your OpenAI API key and other settings:
 
 ```env
-OPENAI_API_KEY=your_openai_api_key_here
+# Required
+OPENAI_API_KEY=sk-your_openai_api_key_here
+
+# Optional Settings
+API_HOST=0.0.0.0
+API_PORT=8000
+LOG_LEVEL=INFO
+DEBUG=False
+MODEL_NAME=gpt-4o-mini
+
+# RAG Settings
+EMBEDDING_MODEL=text-embedding-3-small
+VECTOR_STORE_PATH=./data/vectors
 ```
 
 ### Step 3: Obtain OpenAI API Key
 
 1. Go to [OpenAI Platform](https://platform.openai.com)
 2. Sign in with your account
-3. Navigate to **API keys** section
-4. Click **Create new secret key**
-5. Copy the key and paste it in your `.env` file
+3. Navigate to **API keys** → **Create new secret key**
+4. Copy the key and paste it in your `.env` file
 
-**Note:** Keep your API key private and never commit it to version control.
-
----
-
-## 📁 Project Structure
-
-```
-financial-ai-platform/
-├── README.md                          # Project documentation
-├── requirements.txt                   # Python dependencies
-├── main.py                            # FastAPI application entry point
-│
-├── agents/                            # AI Agent definitions
-│   ├── __init__.py
-│   ├── financial_agent.py             # Financial analysis agent
-│   ├── risk_agent.py                  # Risk assessment agent
-│   ├── report_agent.py                # Report generation agent
-│   ├── document_agent.py              # Document extraction agent
-│   └── [Additional agents]
-│
-├── tasks/                             # Task definitions for agents
-│   ├── __init__.py
-│   ├── analysis_task.py               # Financial analysis tasks
-│   ├── risk_task.py                   # Risk assessment tasks
-│   ├── report_task.py                 # Report generation tasks
-│   ├── extraction_task.py             # Document extraction tasks
-│   └── [Additional tasks]
-│
-├── api/                               # FastAPI REST API
-│   ├── __init__.py
-│   └── financial_api.py               # API routes and endpoints
-│
-├── config/                            # Configuration management
-│   ├── __init__.py
-│   └── settings.py                    # Settings and environment variables
-│
-├── workflows/                         # LangGraph workflow definitions
-│   ├── [Workflow implementations]
-│   └── [Orchestration logic]
-│
-└── .gitignore                         # Git ignore file
-```
+**⚠️ Security Note**: Never commit `.env` to version control!
 
 ---
 
-## 🚀 Usage
+## 🚀 Quick Start
 
 ### Running the FastAPI Server
 
@@ -205,31 +281,51 @@ Or with Uvicorn directly:
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The API will be available at: `http://localhost:8000`
+The API will be available at:
+- **API**: `http://localhost:8000`
+- **API Docs**: `http://localhost:8000/docs` (Interactive Swagger UI)
+- **ReDoc**: `http://localhost:8000/redoc`
 
-Interactive API docs: `http://localhost:8000/docs`
+---
 
-### Basic API Usage
+## 💡 Usage Examples
 
-#### Analyze Financial Document
+### Example 1: Analyze Financial Document via API
 
 ```bash
-curl -X POST "http://localhost:8000/analyze" \
+curl -X POST "http://localhost:8000/api/analyze" \
   -H "Content-Type: application/json" \
   -d '{
-    "document_text": "Your financial document content here..."
+    "document_text": "Q3 2025 Financial Report: Revenue increased by 15% YoY to $2.5B..."
   }'
 ```
 
 **Response:**
 ```json
 {
-  "message": "Workflow implementation placeholder",
-  "input": "Your financial document content here..."
+  "status": "success",
+  "analysis": {
+    "financial_metrics": {
+      "revenue": "$2.5B",
+      "growth_rate": "15%"
+    },
+    "risks": [
+      {
+        "risk_type": "market",
+        "severity": "medium",
+        "description": "Market volatility affecting growth"
+      }
+    ],
+    "recommendations": [
+      "Diversify revenue streams",
+      "Strengthen risk management"
+    ]
+  },
+  "report": "Executive summary with detailed analysis..."
 }
 ```
 
-### Python Usage Example
+### Example 2: Python Integration
 
 ```python
 from agents.financial_agent import get_financial_agent
@@ -240,86 +336,54 @@ from tasks.risk_task import build_risk_task
 from tasks.report_task import build_report_task
 from crewai import Crew
 
-# Create agents
+# Initialize agents
 financial_agent = get_financial_agent()
 risk_agent = get_risk_agent()
 report_agent = get_report_agent()
 
-# Create tasks
-analysis_task = build_analysis_task(financial_agent, "company_financial_data")
-risk_task = build_risk_task(risk_agent, "company_financial_data")
-report_task = build_report_task(report_agent, "analysis_results")
+# Define tasks
+analysis_task = build_analysis_task(financial_agent, financial_data)
+risk_task = build_risk_task(risk_agent, financial_data)
+report_task = build_report_task(report_agent, analysis_results)
 
-# Create crew
-crew = Crew(agents=[financial_agent, risk_agent, report_agent], tasks=[analysis_task, risk_task, report_task])
+# Create and execute crew
+crew = Crew(
+    agents=[financial_agent, risk_agent, report_agent],
+    tasks=[analysis_task, risk_task, report_task]
+)
 
-# Execute workflow
 result = crew.kickoff()
 print(result)
 ```
 
----
+### Example 3: RAG-based Document Search
 
-## 🤖 Agents & Tasks
-
-### Available Agents
-
-#### 1. **Financial Analyst Agent**
-- **File**: `agents/financial_agent.py`
-- **Role**: Analyze company performance
-- **Goal**: Provide detailed financial analysis
-- **Backstory**: Experienced banking analyst
-
-#### 2. **Risk Assessment Agent**
-- **File**: `agents/risk_agent.py`
-- **Role**: Risk Assessment Agent
-- **Goal**: Identify risks in financial data
-- **Backstory**: Risk specialist
-
-#### 3. **Executive Report Agent**
-- **File**: `agents/report_agent.py`
-- **Role**: Executive Report Generator
-- **Goal**: Create executive summaries
-- **Backstory**: Reporting expert
-
-#### 4. **Document Extraction Agent**
-- **File**: `agents/document_agent.py`
-- **Role**: Document Extraction Agent
-- **Goal**: Extract financial information from documents
-- **Backstory**: Expert in annual reports
-
-### Available Tasks
-
-#### 1. **Financial Analysis Task**
 ```python
-build_analysis_task(agent, financial_data)
-# Description: "Analyze financial health: {data}"
-```
+from rag.retriever import DocumentRetriever
 
-#### 2. **Risk Assessment Task**
-```python
-build_risk_task(agent, financial_data)
-# Description: "Assess risks: {data}"
-```
+# Initialize retriever
+retriever = DocumentRetriever()
 
-#### 3. **Report Generation Task**
-```python
-build_report_task(agent, analysis_results)
-# Description: "Generate executive report: {data}"
-```
+# Add documents to knowledge base
+retriever.add_document("Financial Report Q3 2025", financial_text)
 
-#### 4. **Document Extraction Task**
-```python
-build_extraction_task(agent, document_text)
-# Description: "Extract financial metrics from: {text}"
+# Search for relevant documents
+relevant_docs = retriever.retrieve("revenue growth trends", top_k=5)
+
+for doc in relevant_docs:
+    print(f"Document: {doc['title']}")
+    print(f"Similarity Score: {doc['score']}")
+    print(f"Content: {doc['content'][:200]}...")
 ```
 
 ---
 
 ## 📡 API Endpoints
 
-### POST `/analyze`
-Analyze financial documents and generate insights.
+### Core Endpoints
+
+#### 1. **POST `/api/analyze`**
+Analyze financial documents and generate comprehensive insights.
 
 **Request:**
 ```json
@@ -331,87 +395,334 @@ Analyze financial documents and generate insights.
 **Response:**
 ```json
 {
-  "message": "string",
-  "input": "string"
+  "status": "success",
+  "analysis": { },
+  "risks": [ ],
+  "report": "string"
 }
 ```
 
-**Example:**
-```bash
-curl -X POST "http://localhost:8000/analyze" \
-  -H "Content-Type: application/json" \
-  -d '{"document_text": "Q3 2025 Financial Report..."}'
+#### 2. **POST `/api/extract`**
+Extract financial metrics from unstructured documents.
+
+**Request:**
+```json
+{
+  "document_text": "string"
+}
+```
+
+**Response:**
+```json
+{
+  "extracted_metrics": { },
+  "confidence_scores": { }
+}
+```
+
+#### 3. **POST `/api/risk-assessment`**
+Perform comprehensive risk assessment.
+
+**Request:**
+```json
+{
+  "financial_data": "string"
+}
+```
+
+**Response:**
+```json
+{
+  "risks": [ ],
+  "severity_levels": { },
+  "recommendations": [ ]
+}
+```
+
+#### 4. **POST `/api/generate-report`**
+Generate executive report from analysis results.
+
+**Request:**
+```json
+{
+  "analysis_results": "string"
+}
+```
+
+**Response:**
+```json
+{
+  "report": "string",
+  "summary": "string",
+  "recommendations": [ ]
+}
+```
+
+#### 5. **POST `/api/search`**
+Search documents using RAG system.
+
+**Request:**
+```json
+{
+  "query": "string",
+  "top_k": 5
+}
+```
+
+**Response:**
+```json
+{
+  "results": [
+    {
+      "title": "string",
+      "content": "string",
+      "similarity_score": 0.95
+    }
+  ]
+}
+```
+
+#### 6. **GET `/health`**
+Health check endpoint.
+
+**Response:**
+```json
+{
+  "status": "healthy",
+  "timestamp": "2026-06-05T10:30:00Z"
+}
 ```
 
 ---
 
-## 🔧 Configuration Details
+## 🤖 Agents & Tasks
 
-### Model Settings
+### Agent Architecture
 
-The platform uses **GPT-4o-mini** by default. To change the model:
+#### **1. Document Agent** 📄
+- **File**: `agents/document_agent.py`
+- **Role**: Document Processing Specialist
+- **Goal**: Extract and structure financial information from documents
+- **Expertise**: Annual reports, financial statements, regulatory filings
+- **Output**: Structured financial data
+
+#### **2. Financial Agent** 💰
+- **File**: `agents/financial_agent.py`
+- **Role**: Financial Analyst
+- **Goal**: Analyze company financial performance and health
+- **Expertise**: Financial metrics, ratios, trend analysis
+- **Output**: Financial analysis and insights
+
+#### **3. Risk Agent** ⚠️
+- **File**: `agents/risk_agent.py`
+- **Role**: Risk Assessment Specialist
+- **Goal**: Identify and evaluate financial and operational risks
+- **Expertise**: Risk modeling, scenario analysis, mitigation strategies
+- **Output**: Risk assessment and recommendations
+
+#### **4. Report Agent** 📊
+- **File**: `agents/report_agent.py`
+- **Role**: Executive Report Generator
+- **Goal**: Create professional executive summaries and reports
+- **Expertise**: Report writing, summarization, presentation
+- **Output**: Executive reports and summaries
+
+### Task Definitions
+
+#### **Extraction Task**
+```python
+build_extraction_task(document_agent, document_text)
+# Extracts financial metrics: revenue, expenses, assets, liabilities, ratios
+```
+
+#### **Analysis Task**
+```python
+build_analysis_task(financial_agent, financial_data)
+# Analyzes: financial health, performance metrics, trends, benchmarking
+```
+
+#### **Risk Task**
+```python
+build_risk_task(risk_agent, financial_data)
+# Assesses: market risks, operational risks, financial risks, credit risks
+```
+
+#### **Report Task**
+```python
+build_report_task(report_agent, analysis_results)
+# Generates: executive summary, detailed analysis, recommendations
+```
+
+---
+
+## 🔄 Workflows
+
+### LangGraph Workflow System
+
+The platform uses **LangGraph** for sophisticated workflow orchestration:
+
+#### **State Management** (`workflows/state.py`)
+Manages the workflow state throughout execution:
+```python
+class FinancialWorkflowState:
+    document_text: str
+    extracted_data: dict
+    analysis_results: dict
+    risks: list
+    report: str
+    recommendations: list
+```
+
+#### **Financial Workflow** (`workflows/financial_workflow.py`)
+Complete workflow pipeline:
+
+```
+Input Document
+       ↓
+┌─────────────────────────────┐
+│  Document Extraction        │
+│  (Analyze & Extract Data)   │
+└──────────┬──────────────────┘
+           ↓
+┌─────────────────────────────┐
+│  Financial Analysis         │
+│  (Analyze Metrics & Health) │
+└──────────┬──────────────────┘
+           ↓
+┌─────────────────────────────┐
+│  Risk Assessment            │
+│  (Identify & Evaluate Risk) │
+└──────────┬──────────────────┘
+           ↓
+┌─────────────────────────────┐
+│  Report Generation          │
+│  (Create Executive Report)  │
+└──────────┬──────────────────┘
+           ↓
+    Final Report & Insights
+```
+
+---
+
+## 🧠 RAG System
+
+### Retrieval-Augmented Generation
+
+The RAG system enables intelligent document retrieval and context-aware analysis:
+
+#### **Embeddings** (`rag/embeddings.py`)
+- Generate text embeddings using OpenAI
+- Store embeddings in vector format
+- Support for batch processing
+
+#### **Vector Store** (`rag/vector_store.py`)
+- FAISS-based vector storage
+- Efficient similarity search
+- Persistent storage support
+
+#### **Retriever** (`rag/retriever.py`)
+- Retrieve relevant documents for queries
+- Similarity-based ranking
+- Context injection for analysis
+
+### Usage Example
+
+```python
+from rag.retriever import DocumentRetriever
+
+retriever = DocumentRetriever()
+
+# Add documents
+retriever.add_document("2025 Annual Report", document_content)
+
+# Retrieve relevant documents
+results = retriever.retrieve("revenue analysis", top_k=5)
+
+# Results include similarity scores and content
+for result in results:
+    print(f"Score: {result['score']:.2%}")
+    print(f"Content: {result['content']}")
+```
+
+---
+
+## 🔧 Services
+
+### Financial Service (`services/financial_service.py`)
+
+Core business logic for financial operations:
+
+```python
+class FinancialService:
+    def extract_metrics(document_text: str) -> dict
+    def analyze_financial_health(metrics: dict) -> dict
+    def assess_risks(financial_data: dict) -> list
+    def generate_report(analysis: dict) -> str
+    def calculate_ratios(financial_data: dict) -> dict
+```
+
+---
+
+## ⚙️ Configuration Details
+
+### Model Configuration
 
 **File**: `config/settings.py`
 
 ```python
-MODEL_NAME = "gpt-4o-mini"  # Change this to your preferred model
+# Model Settings
+MODEL_NAME = "gpt-4o-mini"  # Default model
+TEMPERATURE = 0.7           # Creativity level
+MAX_TOKENS = 4096           # Maximum response length
+
+# API Settings
+API_HOST = "0.0.0.0"
+API_PORT = 8000
+API_TIMEOUT = 300           # 5 minutes
+
+# RAG Settings
+EMBEDDING_MODEL = "text-embedding-3-small"
+VECTOR_STORE_PATH = "./data/vectors"
+CHUNK_SIZE = 1000
+CHUNK_OVERLAP = 200
+
+# Logging
+LOG_LEVEL = "INFO"
+LOG_FILE = "logs/financial-ai.log"
 ```
 
-Available models:
-- `gpt-4o` - Faster and more advanced
-- `gpt-4o-mini` - Lightweight and cost-effective (default)
-- `gpt-4-turbo` - Previous generation
+### Available Models
+
+| Model | Speed | Cost | Quality |
+|-------|-------|------|---------|
+| `gpt-4o` | Fast | Higher | Highest |
+| `gpt-4o-mini` | Very Fast | Low | High |
+| `gpt-4-turbo` | Medium | High | Very High |
 
 ### Environment Variables
 
-Add these to your `.env` file:
-
 ```env
-# Required
-OPENAI_API_KEY=your_api_key_here
+# OpenAI Configuration
+OPENAI_API_KEY=sk-...
+OPENAI_ORG_ID=org-...
 
-# Optional
-# LOG_LEVEL=INFO
-# DEBUG=False
-```
+# Application Settings
+API_HOST=0.0.0.0
+API_PORT=8000
+DEBUG=False
+LOG_LEVEL=INFO
 
----
+# Model Configuration
+MODEL_NAME=gpt-4o-mini
+TEMPERATURE=0.7
+MAX_TOKENS=4096
 
-## 📊 Workflow Overview
+# RAG Configuration
+EMBEDDING_MODEL=text-embedding-3-small
+VECTOR_STORE_PATH=./data/vectors
 
-```
-┌─────────────────────────┐
-│   Financial Document    │
-└────────┬────────────────┘
-         │
-         ▼
-┌─────────────────────────┐
-│  Document Extraction    │
-│      Agent Task         │
-└────────┬────────────────┘
-         │
-         ▼
-┌─────────────────────────┐
-│   Financial Analysis    │
-│      Agent Task         │
-└────────┬────────────────┘
-         │
-         ▼
-┌─────────────────────────┐
-│   Risk Assessment       │
-│      Agent Task         │
-└────────┬────────────────┘
-         │
-         ▼
-┌─────────────────────────┐
-│   Executive Report      │
-│      Agent Task         │
-└────────┬────────────────┘
-         │
-         ▼
-┌─────────────────────────┐
-│   Final Report & Data   │
-└─────────────────────────┘
+# Database
+VECTOR_DB_TYPE=faiss
 ```
 
 ---
@@ -419,37 +730,76 @@ OPENAI_API_KEY=your_api_key_here
 ## 🐛 Troubleshooting
 
 ### Issue: "ModuleNotFoundError: No module named 'crewai'"
-**Solution**: Install dependencies:
+**Solution**: Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
 ### Issue: "OPENAI_API_KEY not found"
-**Solution**: 
+**Solution**:
 1. Create `.env` file in project root
-2. Add your OpenAI API key: `OPENAI_API_KEY=your_key_here`
+2. Add: `OPENAI_API_KEY=sk-your_key_here`
+3. Restart the application
 
 ### Issue: "Connection error to OpenAI API"
 **Solution**:
-1. Verify your API key is valid
+1. Verify API key is valid and has active credits
 2. Check internet connection
-3. Ensure you have API credits available
+3. Check OpenAI service status
+4. Verify firewall/proxy settings
 
-### Issue: "Agents not responding"
+### Issue: "FAISS index not found"
 **Solution**:
-1. Check if OpenAI API is operational
-2. Verify your model name in `config/settings.py`
-3. Check error logs for details
+1. Initialize vector store: `retriever.initialize()`
+2. Add documents first
+3. Check `VECTOR_STORE_PATH` setting
+
+### Issue: "Agent response timeout"
+**Solution**:
+1. Increase `MAX_TOKENS` in config
+2. Increase timeout in settings
+3. Check API rate limits
+4. Reduce document size
+
+### Issue: "Out of memory errors"
+**Solution**:
+1. Reduce `CHUNK_SIZE` in RAG config
+2. Process documents in batches
+3. Increase system RAM
+4. Use smaller embedding model
+
+---
+
+## 📈 Performance Optimization
+
+### Tips for Better Performance
+
+1. **Batch Processing**: Process multiple documents together
+2. **Caching**: Cache embeddings for repeated queries
+3. **Indexing**: Pre-index documents for faster retrieval
+4. **Model Selection**: Use gpt-4o-mini for speed, gpt-4o for accuracy
+5. **Vector Store**: Regularly optimize FAISS indices
+
+### Monitoring
+
+Monitor key metrics:
+- API response time
+- Token usage
+- Vector store query time
+- Agent execution time
 
 ---
 
 ## 🚀 Next Steps
 
-1. **Test the API**: Visit `http://localhost:8000/docs` to test endpoints
-2. **Customize Agents**: Modify agent roles and backstories in `agents/` folder
-3. **Add New Tasks**: Create new task definitions in `tasks/` folder
-4. **Extend Workflows**: Build complex workflows in `workflows/` folder
-5. **Deploy**: Deploy to cloud platforms like Heroku, AWS, or Azure
+1. **Test the API**: Visit `http://localhost:8000/docs`
+2. **Customize Agents**: Modify agent roles in `agents/` folder
+3. **Add Tasks**: Create new tasks in `tasks/` folder
+4. **Build Workflows**: Create workflows in `workflows/` folder
+5. **Integrate RAG**: Add documents to vector store
+6. **Deploy**: Deploy to cloud (AWS, Azure, GCP, Heroku)
+7. **Monitor**: Set up logging and monitoring
+8. **Scale**: Implement caching and optimization
 
 ---
 
@@ -469,22 +819,24 @@ pip install -r requirements.txt
 We welcome contributions! Follow these steps:
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch: `git checkout -b feature/amazing-feature`
+3. Make your changes
+4. Commit: `git commit -m 'Add amazing feature'`
+5. Push: `git push origin feature/amazing-feature`
+6. Open a Pull Request
 
-### Guidelines:
-- Write clear commit messages
-- Follow Python PEP 8 style guide
+### Contributing Guidelines:
+- Follow PEP 8 style guide
+- Write clear, descriptive commit messages
 - Add comments for complex logic
-- Test your changes before submitting
+- Test changes before submitting
+- Update README if needed
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ---
 
@@ -500,21 +852,24 @@ For support and questions:
 
 ## 📈 Project Status
 
-- ✅ Basic project structure
-- ✅ Agent framework setup
+- ✅ Project structure setup
+- ✅ Agent framework implementation
 - ✅ FastAPI integration
-- 🔄 Full workflow implementation (In Progress)
-- ⏳ FAISS vector search (Planned)
-- ⏳ Advanced analytics (Planned)
+- ✅ RAG system integration
+- ✅ LangGraph workflows
+- 🔄 Advanced analytics (In Progress)
+- ⏳ Real-time monitoring (Planned)
+- ⏳ Cloud deployment templates (Planned)
 
 ---
 
 ## 🙏 Acknowledgments
 
-- OpenAI for GPT models
-- CrewAI team for the multi-agent framework
-- LangChain community for LangGraph
-- Facebook Research for FAISS
+- **OpenAI** for GPT models
+- **CrewAI** for multi-agent framework
+- **LangChain** for LLM tooling
+- **Facebook Research** for FAISS
+- **Pydantic** for data validation
 
 ---
 
@@ -528,4 +883,4 @@ For support and questions:
 
 ---
 
-**Last Updated**: June 5, 2026 | **Version**: 1.0.0 | **Status**: Active Development
+**Last Updated**: June 5, 2026 | **Version**: 2.0.0 | **Status**: Active Development
