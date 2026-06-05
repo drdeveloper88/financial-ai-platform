@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+crewai
+langgraph
+langchain-openai
+faiss-cpu
+python-dotenv
+numpy
+pydantic
